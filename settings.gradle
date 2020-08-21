@@ -1,0 +1,3 @@
+rootProject.name='AppMonitorTester'
+include ':app'
+include ':appmonitor'

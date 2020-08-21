@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/seamfix/appmonitortester/MainActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/androidTest/java/com/seamfix/appmonitor/LoginAttempDaoInstrumentedTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/androidTest/java/com/seamfix/appmonitor/LoginAttemptDaoInstrumentedTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/LoginAttempt.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/LoginAttempt.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/LoginAttemptManager.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/Util.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/local/AppDataBase.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/local/Converters.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/local/dao/LoginAttemptDao.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/local/dao/UserDao.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/LoginAttempt.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/LoginStatus.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/enums/LoginMethod.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/enums/LoginMode.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/response/LoginAttemptResponse.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/remote/ApiClient.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/remote/LoginAttemptWorker.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/remote/Service.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../RatingTestApp/apprating/src/main/java/com/seamfix/apprating/CustomAppRatingDialogFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../RatingTestApp/apprating/src/main/res/layout/dialog_fragment_app_rating.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../smartmdmandroid/app/src/main/java/com/seamfix/smart_mdm_android/datasource/remote/ApiClient.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../smartmdmandroid/app/src/main/java/com/seamfix/smart_mdm_android/util/Constants.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

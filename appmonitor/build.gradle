@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Lifecycle scope
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha06"
+
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4"
+
+    //Room
+    implementation("androidx.room:room-runtime:2.2.5") {
+        exclude group: 'com.google.code.gson'
+    }
+    implementation("androidx.room:room-ktx:2.2.5") {
+        exclude group: 'com.google.code.gson'
+    }
+    kapt "androidx.room:room-compiler:2.2.5"
+    androidTestImplementation("androidx.room:room-testing:2.2.5") {
+        exclude group: 'com.google.code.gson'
+    }
+
+    // Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    // Anko Layouts
+    implementation "org.jetbrains.anko:anko-appcompat-v7:0.10.8"
+
+    //Firebase Auth UI
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+
+    //Workmanager
+    implementation "androidx.work:work-runtime-ktx:2.4.0"
+
+    // Testing-only dependencies
+    androidTestImplementation 'androidx.test:core:1.3.0-rc03'
+    androidTestImplementation 'androidx.test:core-ktx:1.3.0-rc03'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2-rc03'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.2-rc03'
+    androidTestImplementation 'androidx.test:runner:1.3.0-rc03'
+
+    testImplementation 'androidx.test:core:1.3.0-rc03' 
+    testImplementation 'androidx.test.ext:junit:1.1.2-rc03'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.test.ext:truth:1.3.0-rc03'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-rc03'
+    testImplementation 'androidx.test.espresso:espresso-core:3.3.0-rc03'
+    testImplementation 'androidx.test.espresso:espresso-intents:3.3.0-rc03'
+}
