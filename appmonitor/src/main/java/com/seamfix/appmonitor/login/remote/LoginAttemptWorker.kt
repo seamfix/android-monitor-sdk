@@ -29,27 +29,30 @@ class LoginAttemptWorker(private val context: Context, params: WorkerParameters)
         //get the first element
         if(savedLoginAttempts != null && savedLoginAttempts.isNotEmpty()){
 
-            for(loginAttempt in savedLoginAttempts){
-                Log.e(LoginAttemptWorker::class.java.simpleName, "Syncing record: $loginAttempt")
+            val loginAttempt = savedLoginAttempts[0]
 
-                val response: Response<LoginAttemptResponse> = service.sync(loginAttempt)
+            Log.e(LoginAttemptWorker::class.java.simpleName, "Syncing record: $loginAttempt")
 
-                try {
-                    if(response.code() == 200 && response.body() != null){ //response form server:
-                        val  loginAttemptResponse = response.body() as LoginAttemptResponse
+            val response: Response<LoginAttemptResponse> = service.sync(loginAttempt)
 
-                        if(loginAttemptResponse != null && loginAttemptResponse.code == 0){
-                            //Successful sync. Now we delete the record from the database:
-                            db.loginAttemptDao().delete(loginAttempt)
+            try {
+                if(response.code() == 200 && response.body() != null){ //response form server:
+                    val  loginAttemptResponse = response.body() as LoginAttemptResponse
 
-                            //and start the process again until the database is empty:
-                            sync()
-                        }
+                    if(loginAttemptResponse != null && loginAttemptResponse.code == 0){
+                        //Successful sync. Now we delete the record from the database:
+                        db.loginAttemptDao().delete(loginAttempt)
+
+                        //and start the process again until the database is empty:
+                        sync()
                     }
-                } catch (e: Exception) {
-                    return Result.retry()
+                }else{
+                    sync()//restart
                 }
+            } catch (e: Exception) {
+                return Result.retry()
             }
+
         }else{
             Log.e(LoginAttemptWorker::class.java.simpleName, "No work to do.")
         }
