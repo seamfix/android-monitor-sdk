@@ -22,8 +22,8 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class LoginAttemptDaoInstrumentedTest {
 
-    lateinit var db: AppDatabase
-    lateinit var loginAttemptDao: LoginAttemptDao
+    private lateinit var db: AppDatabase
+    private lateinit var loginAttemptDao: LoginAttemptDao
 
     private val loginAttempt = LoginAttempt(0,
         "jeffemuveyan@gmail.com",
@@ -66,7 +66,7 @@ class LoginAttemptDaoInstrumentedTest {
         //the first item we add to the database will start from 1 instead of 0.
 
         assert(aSavedLoginAttempt != null)
-        assert(aSavedLoginAttempt!!.email == loginAttempt.email)
+        assert(aSavedLoginAttempt!!.username == loginAttempt.username)
     }
 
 

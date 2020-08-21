@@ -9,7 +9,7 @@ import com.seamfix.appmonitor.login.local.AppDatabase
 import com.seamfix.appmonitor.login.model.response.LoginAttemptResponse
 import retrofit2.Response
 
-class LoginAttemptWorker(private val context: Context, params: WorkerParameters): CoroutineWorker(context, params) {
+internal class LoginAttemptWorker(private val context: Context, params: WorkerParameters): CoroutineWorker(context, params) {
 
     private val db = AppDatabase.getDatabase(context)
     private val retrofit = ApiClient.getClient(context)
