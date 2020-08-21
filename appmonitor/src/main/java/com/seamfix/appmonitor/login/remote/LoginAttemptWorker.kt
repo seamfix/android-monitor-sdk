@@ -50,7 +50,7 @@ class LoginAttemptWorker(private val context: Context, params: WorkerParameters)
                     sync()//restart
                 }
             } catch (e: Exception) {
-                return Result.retry()
+                sync()//restart
             }
 
         }else{

@@ -123,6 +123,41 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/AndroidManifest.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/activity/SplashScreenActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/enums/Constants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/main/entity/enrollmentref/EnrollmentRef.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/util/TelcoUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/utility/SessionUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../smartmdmandroid/app/src/main/java/com/seamfix/smart_mdm_android/datasource/remote/ApiClient.kt">
           <value>
             <set />
