@@ -44,6 +44,7 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
                     if(loginAttemptResponseList.isNotEmpty() && loginAttemptResponseList[0].code == 0){
                         //Successful sync. Now we delete the record from the database:
                         db.loginAttemptDao().delete(loginAttempt)
+                        Log.e(LoginAttemptWorker::class.java.simpleName, "Sync successful")
                     }
 
                     //and start the process again until the database is empty:
