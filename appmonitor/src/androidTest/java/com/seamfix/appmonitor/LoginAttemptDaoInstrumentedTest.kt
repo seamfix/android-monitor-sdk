@@ -72,22 +72,24 @@ class LoginAttemptDaoInstrumentedTest {
 
     @Test
     @Throws(Exception::class)
-    fun canDelete() = runBlocking {
+    fun delete() = runBlocking {
 
         //write
         db.loginAttemptDao().save(loginAttempt)
 
         //confirm
+        val savedLoginAttempt = db.loginAttemptDao().getSynchronously(1)
+        assert(savedLoginAttempt!!.username == loginAttempt.username)
+
         var savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
-        assert(savedLoginAttempts != null)
         assert(savedLoginAttempts!!.size == 1)
 
         //delete
-        db.loginAttemptDao().delete(loginAttempt)
+        db.loginAttemptDao().delete(savedLoginAttempt)
 
         savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
 
         //confirm
-        assertThat(savedLoginAttempts!!.size, CoreMatchers.equalTo(0))
+        assert(savedLoginAttempts!!.isEmpty())
     }
 }
