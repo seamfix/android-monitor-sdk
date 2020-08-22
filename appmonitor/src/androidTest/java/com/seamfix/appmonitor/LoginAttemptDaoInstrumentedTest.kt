@@ -25,7 +25,7 @@ class LoginAttemptDaoInstrumentedTest {
     private lateinit var db: AppDatabase
     private lateinit var loginAttemptDao: LoginAttemptDao
 
-    private val loginAttempt = LoginAttempt(0,
+    private val loginAttempt = LoginAttempt(
         "jeffemuveyan@gmail.com",
         100000,
         "NA",
