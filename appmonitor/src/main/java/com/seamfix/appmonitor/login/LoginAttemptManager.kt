@@ -64,5 +64,8 @@ object LoginAttemptManager {
         WorkManager
             .getInstance(context)
             .enqueueUniqueWork("sync_offline_attempts", ExistingWorkPolicy.REPLACE, syncWorkRequest)
+
+        //save the uuid for later use to monitor this worker:
+        saveCurrentUploadWorkInformation(context, syncWorkRequest.id)
     }
 }
