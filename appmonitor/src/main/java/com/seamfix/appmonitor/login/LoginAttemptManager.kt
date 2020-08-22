@@ -6,6 +6,9 @@ import androidx.work.*
 import com.seamfix.appmonitor.login.local.AppDatabase
 import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.remote.LoginAttemptWorker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 object LoginAttemptManager {
@@ -15,12 +18,14 @@ object LoginAttemptManager {
 
 
     /*** Add a login attempt. This login attempt will be saved and synced in queue ***/
-    suspend fun addLoginAttempt(context: Context, loginAttempt: LoginAttempt){
-        db = AppDatabase.getDatabase(context)
-        db.loginAttemptDao().save(loginAttempt)
+    fun addLoginAttempt(context: Context, loginAttempt: LoginAttempt){
+        GlobalScope.launch(Dispatchers.IO){
+            db = AppDatabase.getDatabase(context)
+            db.loginAttemptDao().save(loginAttempt)
 
-        //After the record has been saved, we need to start syncing it:
-        syncLoginAttempts(context)
+            //After the record has been saved, we need to start syncing it:
+            syncLoginAttempts(context)
+        }
     }
 
 
