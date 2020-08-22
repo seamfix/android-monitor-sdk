@@ -9,11 +9,13 @@ import com.seamfix.appmonitor.login.model.enums.LoginStatus
 
 @Keep
 @Entity(tableName = "login_attempt")
-data class LoginAttempt(@PrimaryKey(autoGenerate = true) val id: Int = 0,
-                        val username: String,
+data class LoginAttempt(val username: String,
                         val duration: Long,
                         val loginType: String,
                         val loginStatus: LoginStatus,
                         val failureReason: String,
                         val loginMode: LoginMode,
-                        val loginMethod: LoginMethod)
+                        val loginMethod: LoginMethod){
+
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
+}
