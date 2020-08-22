@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val loginAttempt1 = LoginAttempt(
+        //create a login attempt object
+        val loginAttempt = LoginAttempt(
             "jeffemuveyan@gmail.com",
             100000,
             "NA",
@@ -24,18 +25,10 @@ class MainActivity : AppCompatActivity() {
             LoginMode.ONLINE,
             LoginMethod.EMAIL)
 
-        val loginAttempt2  = LoginAttempt(
-            "Bellogate@gmail.com",
-            100000,
-            "NA",
-            LoginStatus.SUCCESS,
-            "NA",
-            LoginMode.ONLINE,
-            LoginMethod.EMAIL)
-
         button.setOnClickListener {
-            LoginAttemptManager.addLoginAttempt(this@MainActivity, loginAttempt1)
-            LoginAttemptManager.addLoginAttempt(this@MainActivity, loginAttempt2)
+
+            //save the login attempt object
+            LoginAttemptManager.addLoginAttempt(this@MainActivity, loginAttempt)
         }
 
     }
