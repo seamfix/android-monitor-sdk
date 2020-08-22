@@ -8,5 +8,5 @@ import retrofit2.http.*
 internal interface Service {
 
     @POST("/biocapture/audit/alog")
-    suspend fun sync(@Body loginAttempt: LoginAttempt): Response<LoginAttemptResponse>
+    suspend fun sync(@Body loginAttempt: List<LoginAttempt>): Response<List<LoginAttemptResponse>>
 }

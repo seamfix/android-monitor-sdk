@@ -3,9 +3,9 @@ package com.seamfix.appmonitor.login.remote
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
-import androidx.work.Operation
 import androidx.work.WorkerParameters
 import com.seamfix.appmonitor.login.local.AppDatabase
+import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.model.response.LoginAttemptResponse
 import retrofit2.Response
 
@@ -16,12 +16,12 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
     private val service: Service = retrofit.create(Service::class.java)
 
     override suspend fun doWork(): Result {
+        Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
         return sync()
     }
 
 
     private suspend fun sync(): Result {
-        Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
 
         //get all login attempt in the database
         val savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
@@ -31,21 +31,23 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
 
             val loginAttempt = savedLoginAttempts[0]
 
-            Log.e(LoginAttemptWorker::class.java.simpleName, "Syncing record: $loginAttempt")
-
-            val response: Response<LoginAttemptResponse> = service.sync(loginAttempt)
+            Log.e(LoginAttemptWorker::class.java.simpleName,
+                "Syncing record(s): ${savedLoginAttempts.size}\nIn progress: $loginAttempt")
 
             try {
-                if(response.code() == 200 && response.body() != null){ //response form server:
-                    val  loginAttemptResponse = response.body() as LoginAttemptResponse
+                val request: List<LoginAttempt> = listOf(loginAttempt)
+                val response: Response<List<LoginAttemptResponse>> = service.sync(request)
 
-                    if(loginAttemptResponse != null && loginAttemptResponse.code == 0){
+                if(response.code() == 200 && response.body() != null){ //response form server:
+                    val  loginAttemptResponseList = response.body() as List<LoginAttemptResponse>
+
+                    if(loginAttemptResponseList.isNotEmpty() && loginAttemptResponseList[0].code == 0){
                         //Successful sync. Now we delete the record from the database:
                         db.loginAttemptDao().delete(loginAttempt)
-
-                        //and start the process again until the database is empty:
-                        sync()
                     }
+
+                    //and start the process again until the database is empty:
+                    sync()
                 }else{
                     sync()//restart
                 }
