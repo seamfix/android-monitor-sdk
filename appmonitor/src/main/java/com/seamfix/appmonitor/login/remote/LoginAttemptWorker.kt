@@ -50,7 +50,7 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
                     //and start the process again until the database is empty:
                     sync()
                 }else{
-                    Log.e(LoginAttemptWorker::class.java.simpleName, "Sync failed")
+                    Log.e(LoginAttemptWorker::class.java.simpleName, "Sync failed: ${response?.code()}")
                     sync()//restart
                 }
             } catch (e: Exception) {
