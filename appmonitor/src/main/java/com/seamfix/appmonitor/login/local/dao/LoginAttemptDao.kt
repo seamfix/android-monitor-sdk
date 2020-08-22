@@ -21,6 +21,9 @@ interface LoginAttemptDao {
     @Query("SELECT * FROM login_attempt")
     suspend fun getAllSynchronously(): List<LoginAttempt>?
 
+    @Query("SELECT * FROM login_attempt")
+    fun getAll(): List<LoginAttempt>?
+
     @Update
     suspend fun update(attempt: LoginAttempt)
 
