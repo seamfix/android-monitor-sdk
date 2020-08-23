@@ -1,4 +1,4 @@
-package com.seamfix.appmonitor.login.remote
+package com.seamfix.appmonitor.common
 
 import android.content.Context
 import okhttp3.OkHttpClient

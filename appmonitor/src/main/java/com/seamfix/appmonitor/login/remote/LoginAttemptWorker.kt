@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.seamfix.appmonitor.common.ApiClient
+import com.seamfix.appmonitor.common.Service
 import com.seamfix.appmonitor.login.local.AppDatabase
 import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.model.response.LoginAttemptResponse
@@ -13,7 +15,8 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
 
     private val db = AppDatabase.getDatabase(context)
     private val retrofit = ApiClient.getClient(context)
-    private val service: Service = retrofit.create(Service::class.java)
+    private val service: Service = retrofit.create(
+        Service::class.java)
 
     override suspend fun doWork(): Result {
         Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
