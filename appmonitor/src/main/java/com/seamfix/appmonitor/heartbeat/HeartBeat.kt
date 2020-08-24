@@ -18,10 +18,10 @@ object HeartBeat {
             val retrofit = ApiClient.getClient(context)
             val service: Service = retrofit.create(Service::class.java)
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
-            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getHeartbeatDevice().clientCurrentTime}\n ")
+            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientCurrentTime}\n ")
 
             try {
-                val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getHeartbeatDevice()
+                val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getDeviceHeartBeat()
                 val response: Response<String> = service.sync(deviceHeartBeat)
 
                 if (response.code() == 200 && response.body() != null) {
@@ -50,7 +50,7 @@ object HeartBeat {
         }
     }
     interface HeartbeatOperation{
-        fun getHeartbeatDevice(): DeviceHeartBeat
+        fun getDeviceHeartBeat(): DeviceHeartBeat
     }
 
 }
