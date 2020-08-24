@@ -12,10 +12,10 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, baseURL: String, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
+    fun runJob(context: Context, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
 
         GlobalScope.launch(Dispatchers.IO) {
-            val retrofit = ApiClient.getClient(context, baseURL)
+            val retrofit = ApiClient.getClient(context)
             val service: Service = retrofit.create(Service::class.java)
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
             Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientUptime}\n ")
@@ -40,12 +40,12 @@ object HeartBeat {
 
                 Thread.sleep((heartbeatInterval).toLong())
                 //restart
-                runJob(context, baseURL, heartbeatInterval, heartbeatOperation)
+                runJob(context, heartbeatInterval, heartbeatOperation)
 
             } catch (e: Exception) {
                 Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
                 //restart
-                runJob(context, baseURL, heartbeatInterval, heartbeatOperation)
+                runJob(context, heartbeatInterval, heartbeatOperation)
             }
         }
     }

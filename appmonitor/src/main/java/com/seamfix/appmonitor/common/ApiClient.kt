@@ -8,20 +8,23 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 internal object ApiClient {
 
-    fun getClient(context: Context, baseURL: String): Retrofit{
+    private val config = AppMonitor.config
+
+    fun getClient(context: Context): Retrofit{
+
+        val collectedHeaders = config.headers
 
         val httpClient =  OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
             val original = chain.request();
+            val requestBuilder = original.newBuilder()
 
-            val request = original.newBuilder()
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Accept", "*/*")
-                .header("Accept-Encoding", "gzip, deflate, br")
-                .header("Connection", "keep-alive")
+            for(header in collectedHeaders){
+                requestBuilder.addHeader(header.first, header.second)
+            }
 
-                .method(original.method(), original.body())
-                .build()
+            requestBuilder.method(original.method(), original.body())
+            val request = requestBuilder.build()
 
             chain.proceed(request);
         }
@@ -29,7 +32,7 @@ internal object ApiClient {
         val  client = httpClient.build()
 
         return Retrofit.Builder()
-            .baseUrl(baseURL)
+            .baseUrl(config.baseURL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

@@ -23,7 +23,7 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
         Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
 
         val baseURL = inputData.getString(BASE_URL)!!
-        retrofit = ApiClient.getClient(context, baseURL)
+        retrofit = ApiClient.getClient(context)
         service = retrofit.create(Service::class.java)
 
         return sync()
