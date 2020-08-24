@@ -20,10 +20,10 @@ object HeartBeat {
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
             Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getHeartbeatDevice().clientCurrentTime}\n ")
 
-            val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getHeartbeatDevice()
-            val response: Response<String> = service.sync(deviceHeartBeat)
-
             try {
+                val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getHeartbeatDevice()
+                val response: Response<String> = service.sync(deviceHeartBeat)
+
                 if (response.code() == 200 && response.body() != null) {
                     val newHeartbeatInterval: String = response.body() as String
                     if (!newHeartbeatInterval.isNullOrEmpty()) {
