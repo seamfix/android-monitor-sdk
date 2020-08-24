@@ -18,4 +18,30 @@ data class LoginAttempt(val username: String,
                         val loginMethod: LoginMethod){
 
     @PrimaryKey(autoGenerate = true) var id: Int = 0
+    var macAddress: String = ""
+    var kitTag : String = ""
+    var fullName : String = ""
+    var activity : String = ""
+    var enrollmentRef: String = ""
+    var activityCode : String = ""
+    var refDeviceId : String = ""
+    var realTimeDeviceId : String = ""
+    var appVersion : Double = 0.00
+    var failureCount : Int = 0
+    var networkStrength : String = ""
+    var syncFileStatus : String = ""
+    var syncTransferMode : String = ""
+    var syncFileName : String = ""
+    var networkType : String = ""
+    var networkStatus : String = ""
+    var extensionCount : Int = 0
+    var pointOfTermination : String = ""
+    var terminationFlag : String = ""
+    var phoneNumber: String = ""
+    var simSerial: String = ""
+    var info1 : String = ""
+    var info2 : String = ""
+    var info3 : String = ""
+    var info4 : String = ""
+    var info5 : String = ""
 }
