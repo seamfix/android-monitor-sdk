@@ -2,55 +2,54 @@ package com.seamfix.appmonitor.heartbeat
 
 import android.content.Context
 import android.util.Log
-import androidx.work.*
-import com.seamfix.appmonitor.heartbeat.remote.HeartbeatWorker
-import java.util.concurrent.TimeUnit
+import com.seamfix.appmonitor.common.ApiClient
+import com.seamfix.appmonitor.common.Service
+import com.sf.rest.request.device.DeviceHeartBeat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 object HeartBeat {
 
-    private var heartbeatInterval = 10000 //default heart beat sync interval: 10 seconds
+    fun runJob(context: Context, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
 
-    /*** Starts the process to gather and sync data for heart beat.
-     * @param heartbeatInterval: The duration the library should wait before sending another
-     * heart beat request.
-     */
-    fun sync(context: Context, heartbeatInterval: Int){
-        this.heartbeatInterval = heartbeatInterval
+        GlobalScope.launch(Dispatchers.IO) {
+            val retrofit = ApiClient.getClient(context)
+            val service: Service = retrofit.create(Service::class.java)
+            Log.e("HeartbeatWorker", "Heartbeat syncing\nInterval: $heartbeatInterval")
 
-        //We need to ensure that we don't already have a Work manager instance running so that we don't
-        //mistakenly create multiple work managers.
-        val existingUUID = getCurrentUploadWorkInformation(context)
+            val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getHeartbeatDevice()
+            val response: Response<String> = service.sync(deviceHeartBeat)
 
-        if(existingUUID != null){//existing work manger instance exists:
-            Log.e("HeartBeat", "Work manger instance has already been created.")
-        }else{
-            //Create a new work manager:
-            createWorker(context)
+            try {
+                if (response.code() == 200 && response.body() != null) {
+                    val newHeartbeatInterval: String = response.body() as String
+                    if (!newHeartbeatInterval.isNullOrEmpty()) {
+                        //the response is an integer string that indicates the next heartbeat interval:
+                        //We just log the response:
+                        Log.e("HeartbeatWorker", "Heartbeat sync success.\nResponse: $newHeartbeatInterval")
+
+                    } else {
+                        Log.e("HeartbeatWorker", "Heartbeat Response is empty")
+                    }
+                } else {
+                    Log.e("HeartbeatWorker", "Heartbeat sync failed, code: ${response.code()}")
+                }
+
+                Thread.sleep((heartbeatInterval).toLong())
+                //restart
+                runJob(context, heartbeatInterval, heartbeatOperation)
+
+            } catch (e: Exception) {
+                Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
+                //restart
+                runJob(context, heartbeatInterval, heartbeatOperation)
+            }
         }
     }
-
-
-    private fun createWorker(context: Context) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val syncWorkRequest: OneTimeWorkRequest = OneTimeWorkRequestBuilder<HeartbeatWorker>()
-            .addTag("sync_heartbeat")
-            .setInputData(workDataOf(
-                "heartbeatInterval" to heartbeatInterval
-            ))
-            .setConstraints(constraints)
-            .setBackoffCriteria(
-                BackoffPolicy.LINEAR,
-                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                TimeUnit.MILLISECONDS)
-            .build()
-
-        WorkManager
-            .getInstance(context)
-            .enqueueUniqueWork("sync_heartbeat", ExistingWorkPolicy.REPLACE, syncWorkRequest)
-
-        //save the uuid for later use to monitor this worker:
-        saveCurrentUploadWorkInformation(context, syncWorkRequest.id)
+    interface HeartbeatOperation{
+        fun getHeartbeatDevice(): DeviceHeartBeat
     }
+
 }
