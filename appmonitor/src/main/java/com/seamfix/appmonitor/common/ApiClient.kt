@@ -8,7 +8,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 internal object ApiClient {
 
-    fun getClient(context: Context): Retrofit{
+    fun getClient(context: Context, baseURL: String): Retrofit{
 
         val httpClient =  OkHttpClient.Builder()
         httpClient.addInterceptor { chain ->
@@ -29,7 +29,7 @@ internal object ApiClient {
         val  client = httpClient.build()
 
         return Retrofit.Builder()
-            .baseUrl("http://13.56.69.207:8190")
+            .baseUrl(baseURL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

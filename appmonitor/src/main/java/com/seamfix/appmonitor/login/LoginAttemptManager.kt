@@ -15,10 +15,12 @@ object LoginAttemptManager {
 
     //Local
     private lateinit var db : AppDatabase
+    private lateinit var baseURL: String
 
 
     /*** Add a login attempt. This login attempt will be saved and synced in queue ***/
-    fun addLoginAttempt(context: Context, loginAttempt: LoginAttempt){
+    fun addLoginAttempt(context: Context, baseURL: String, loginAttempt: LoginAttempt){
+        this.baseURL = baseURL
         GlobalScope.launch(Dispatchers.IO){
             db = AppDatabase.getDatabase(context)
             db.loginAttemptDao().save(loginAttempt)
@@ -55,6 +57,9 @@ object LoginAttemptManager {
         val syncWorkRequest: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LoginAttemptWorker>()
             .addTag("sync_offline_attempts")
             .setConstraints(constraints)
+            .setInputData(workDataOf(
+                BASE_URL to baseURL
+            ))
             .setBackoffCriteria(
                 BackoffPolicy.LINEAR,
                 OneTimeWorkRequest.MIN_BACKOFF_MILLIS,

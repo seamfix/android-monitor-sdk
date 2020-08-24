@@ -3,12 +3,12 @@ package com.seamfix.appmonitortester
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.seamfix.appmonitor.heartbeat.HeartBeat
+import com.seamfix.appmonitor.heartbeat.model.DeviceHeartBeatRequest
 import com.seamfix.appmonitor.login.LoginAttemptManager
 import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.model.enums.LoginMethod
 import com.seamfix.appmonitor.login.model.enums.LoginMode
 import com.seamfix.appmonitor.login.model.enums.LoginStatus
-import com.sf.rest.request.device.DeviceHeartBeat
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -18,15 +18,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //Start the heart beat job:
-        HeartBeat.runJob(this, 5000, object : HeartBeat.HeartbeatOperation{
+        HeartBeat.runJob(this,
+            "http://13.56.69.207:8190",
+            5000,
+            object : HeartBeat.HeartbeatOperation{
 
-            override fun getDeviceHeartBeat(): com.sf.rest.request.device.DeviceHeartBeat {
+            override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
-                val deviceHeartBeat = DeviceHeartBeat()
-                deviceHeartBeat.setClientCurrentTime(Date())
+                val deviceHeartBeat = DeviceHeartBeatRequest()
+                deviceHeartBeat.clientCurrentTime = System.currentTimeMillis().toString()
 
                 return deviceHeartBeat
             }
@@ -45,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
 
             //save the login attempt object
-            LoginAttemptManager.addLoginAttempt(this@MainActivity, loginAttempt)
+            LoginAttemptManager.addLoginAttempt(this@MainActivity,
+                "http://13.56.69.207:8190",
+                loginAttempt)
         }
 
     }

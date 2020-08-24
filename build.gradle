@@ -20,11 +20,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https:/nexus.seamfix.com/nexus/content/repositories/releases/' }
-
-        maven {
-            url "https://nexus.seamfix.com/nexus/content/groups/public"
-        }
     }
 }
 

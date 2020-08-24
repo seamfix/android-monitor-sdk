@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.seamfix.appmonitor.common.ApiClient
 import com.seamfix.appmonitor.common.Service
-import com.sf.rest.request.device.DeviceHeartBeat
+import com.seamfix.appmonitor.heartbeat.model.DeviceHeartBeatRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -12,16 +12,16 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
+    fun runJob(context: Context, baseURL: String, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
 
         GlobalScope.launch(Dispatchers.IO) {
-            val retrofit = ApiClient.getClient(context)
+            val retrofit = ApiClient.getClient(context, baseURL)
             val service: Service = retrofit.create(Service::class.java)
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
-            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientCurrentTime}\n ")
+            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientUptime}\n ")
 
             try {
-                val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getDeviceHeartBeat()
+                val deviceHeartBeat: DeviceHeartBeatRequest = heartbeatOperation.getDeviceHeartBeat()
                 val response: Response<String> = service.sync(deviceHeartBeat)
 
                 if (response.code() == 200 && response.body() != null) {
@@ -40,17 +40,17 @@ object HeartBeat {
 
                 Thread.sleep((heartbeatInterval).toLong())
                 //restart
-                runJob(context, heartbeatInterval, heartbeatOperation)
+                runJob(context, baseURL, heartbeatInterval, heartbeatOperation)
 
             } catch (e: Exception) {
                 Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
                 //restart
-                runJob(context, heartbeatInterval, heartbeatOperation)
+                runJob(context, baseURL, heartbeatInterval, heartbeatOperation)
             }
         }
     }
     interface HeartbeatOperation{
-        fun getDeviceHeartBeat(): DeviceHeartBeat
+        fun getDeviceHeartBeat(): DeviceHeartBeatRequest
     }
 
 }
