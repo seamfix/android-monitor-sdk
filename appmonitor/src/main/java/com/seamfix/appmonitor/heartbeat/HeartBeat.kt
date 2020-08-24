@@ -17,7 +17,8 @@ object HeartBeat {
         GlobalScope.launch(Dispatchers.IO) {
             val retrofit = ApiClient.getClient(context)
             val service: Service = retrofit.create(Service::class.java)
-            Log.e("HeartbeatWorker", "Heartbeat syncing\nInterval: $heartbeatInterval")
+            Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
+            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getHeartbeatDevice().clientCurrentTime}\n ")
 
             val deviceHeartBeat: DeviceHeartBeat = heartbeatOperation.getHeartbeatDevice()
             val response: Response<String> = service.sync(deviceHeartBeat)
