@@ -15,6 +15,7 @@ object HeartBeat {
     fun runJob(context: Context, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
 
         GlobalScope.launch(Dispatchers.IO) {
+            Thread.sleep((heartbeatInterval).toLong())
             val retrofit = ApiClient.getClient(context)
             val service: Service = retrofit.create(Service::class.java)
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
@@ -37,8 +38,6 @@ object HeartBeat {
                 } else {
                     Log.e("HeartbeatWorker", "Heartbeat sync failed, code: ${response.code()}")
                 }
-
-                Thread.sleep((heartbeatInterval).toLong())
                 //restart
                 runJob(context, heartbeatInterval, heartbeatOperation)
 

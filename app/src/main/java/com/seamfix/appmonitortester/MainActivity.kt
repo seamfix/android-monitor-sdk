@@ -23,12 +23,11 @@ class MainActivity : AppCompatActivity() {
         val config = ConfigBuilder()
             .setBaseURL("http://10.158.13.105:8190")//set the base url
 
-            .addHeader("Mac-Address" to "AHVZ0xjKtAKKWJQGPATmhhieuGCa0uYpNwhiBO8fqROnyWMULZIow6IchnPBPogwAmIoBHGj2JLeN6j9THnL4f4B_dhcQr0c-g")
             .addHeader("Client-ID" to "smartclient")
             .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.0.0, Install Date: NA]")
-            .addHeader("User-UUID" to "755facd3-8556-4ef2-84fc-884279978be9")
-            .addHeader("sc-auth-key" to "AHVZ0xhboOeVb_UiSww5Ozq66_Oh856fE2fqO7anzgFdaZviFO-9cjYHN7mzi4WDC2w_g4NoPcnujXCaVTT5m9b135OntoS_13Ywg6aBHsuMWfwsQPXdVMcx_VMNd2fMM3yWSGFSFpby4ajtdrEe7WfPdEEg4QaXtPQwoq-8Cl5jHBv9HRCUFlM")
-            .addHeader("Device-ID" to "AHVZ0xizFFUGX0Oa4jGqW34l4HPENlaVCs2EPbAvqTf87EldBIjvrOVLIroGkbZYuGcfpVqBfOj3PGXYPAu_jzb49qU1L3jsmw")
+            .addHeader("User-UUID" to "10be74e7-3337-4e93-9114-c71707a7c220")
+            .addHeader("sc-auth-key" to "AHVZ0xgM8X3ghf-1zBqnnAQO1nthw6dlik2zXTh1XpnWkbp" +
+                    "FkGz4S8dL7u-2e1F6E2WKrQo9t4dfyVJib1_gk_in6O6oSHyN2w")
             .addHeader("Content-Type" to "application/x-www-form-urlencoded")
             .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.2, Install Date: NA]")
             .addHeader("Accept" to "*/*")
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Start the heart beat job:
-        HeartBeat.runJob(this, 5000, object : HeartBeat.HeartbeatOperation{
+        HeartBeat.runJob(this, 10000, object : HeartBeat.HeartbeatOperation{
             override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         //create a login attempt object
         val loginAttempt = LoginAttempt(
+            "GLO-DN-921C",
             "jeffemuveyan@gmail.com",
             100000,
             "NA",
