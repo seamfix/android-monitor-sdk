@@ -50,7 +50,7 @@ object LoginAttemptManager {
 
     private fun createWorker(context: Context) {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
             .build()
         val syncWorkRequest: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LoginAttemptWorker>()
             .addTag("sync_offline_attempts")

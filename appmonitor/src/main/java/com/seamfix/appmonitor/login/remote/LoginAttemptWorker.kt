@@ -22,7 +22,6 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
     override suspend fun doWork(): Result {
         Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
 
-        val baseURL = inputData.getString(BASE_URL)!!
         retrofit = ApiClient.getClient(context)
         service = retrofit.create(Service::class.java)
 
@@ -54,6 +53,10 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
                         //Successful sync. Now we delete the record from the database:
                         db.loginAttemptDao().delete(loginAttempt)
                         Log.e(LoginAttemptWorker::class.java.simpleName, "Sync successful")
+
+                    }else if(loginAttemptResponseList.isNotEmpty() && loginAttemptResponseList[0].code == -1){
+                        Log.e(LoginAttemptWorker::class.java.simpleName,
+                            "Sync failed: ${loginAttemptResponseList[0].description}")
                     }
 
                     //and start the process again until the database is empty:

@@ -21,14 +21,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val config = ConfigBuilder()
-            .setBaseURL("http://13.56.69.207:8190")//set the base url
+            .setBaseURL("http://10.158.13.105:8190")//set the base url
 
-            .addHeader("Mac-Address" to "AHVZ0xjvKxQNwWaiA1rSynDyFqnh89DBdN4ZPXOUbIMt2SjFpAR217a22n7C30RaS0u0-Ni84NRCX1rkkTyDMo8PQ5R3yeD9o4oVcnwbw5FMxyveAhiwoSc}")
+            .addHeader("Mac-Address" to "AHVZ0xjKtAKKWJQGPATmhhieuGCa0uYpNwhiBO8fqROnyWMULZIow6IchnPBPogwAmIoBHGj2JLeN6j9THnL4f4B_dhcQr0c-g")
             .addHeader("Client-ID" to "smartclient")
-            .addHeader("User-Agent" to "GLO-HH-SFX001-LAG-ETI-785D")
-            .addHeader("User-UUID" to "2ea4fbd3-6e01-4c8f-a6ef-f24e4c2100f9")
-            .addHeader("sc-auth-key" to "AHVZ0xi17WwW9nHIIKe5gD-dajR6q8WnPiJ1EIB7Fooq8dzoG9EKPfS2ZV0kH5nslZ0ZfNfWEKAjjwjyuqkcPXyh6UVq1BlVigFbPKe7DuvRe_U_Wgurqss7vihZxdSjmUZbia5XTwGNlDfhZ1hA-iTLxhNdgoM3-g")
-            .addHeader("Device-ID" to "AHVZ0xhVxA-dJPdvqldEzRzJCWUdjtHH9xSk7JKgImBarhDSPQXyEAfRwN9C-Bf21zWD63BX9ENlmm9hVGQKxSKV-TKAZsnAEp3HUot9qp-QK-QeBR26m-8")
+            .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.0.0, Install Date: NA]")
+            .addHeader("User-UUID" to "755facd3-8556-4ef2-84fc-884279978be9")
+            .addHeader("sc-auth-key" to "AHVZ0xhboOeVb_UiSww5Ozq66_Oh856fE2fqO7anzgFdaZviFO-9cjYHN7mzi4WDC2w_g4NoPcnujXCaVTT5m9b135OntoS_13Ywg6aBHsuMWfwsQPXdVMcx_VMNd2fMM3yWSGFSFpby4ajtdrEe7WfPdEEg4QaXtPQwoq-8Cl5jHBv9HRCUFlM")
+            .addHeader("Device-ID" to "AHVZ0xizFFUGX0Oa4jGqW34l4HPENlaVCs2EPbAvqTf87EldBIjvrOVLIroGkbZYuGcfpVqBfOj3PGXYPAu_jzb49qU1L3jsmw")
             .addHeader("Content-Type" to "application/x-www-form-urlencoded")
             .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.2, Install Date: NA]")
             .addHeader("Accept" to "*/*")
