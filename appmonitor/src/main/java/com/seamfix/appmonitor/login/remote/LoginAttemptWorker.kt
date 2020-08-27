@@ -66,6 +66,7 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
                     sync()//restart
                 }
             } catch (e: Exception) {
+                Log.e(LoginAttemptWorker::class.java.simpleName, "Network error: ${e.message}")
                 sync()//restart
             }
 
