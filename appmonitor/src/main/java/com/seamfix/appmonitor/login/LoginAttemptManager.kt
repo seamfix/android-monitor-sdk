@@ -40,7 +40,7 @@ object LoginAttemptManager {
         val existingUUID = getCurrentUploadWorkInformation(context)
 
         if(existingUUID != null){//existing work manger instance exists:
-            Log.e("LoginAttemptManager", "Work manger instance has already been created.")
+            Log.e("LoginAttemptManager", "A sWork manger instance has already been created.")
         }else{
             //Create a new work manager:
             createWorker(context)
