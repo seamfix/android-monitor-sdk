@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Start the heart beat job:
-        HeartBeat.runJob(this, 10000, object : HeartBeat.HeartbeatOperation{
+        HeartBeat.runJob(this, object : HeartBeat.HeartbeatOperation{
             override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
                 deviceHeartBeat.clientCurrentTime = System.currentTimeMillis().toString()
 
                 return deviceHeartBeat
+            }
+
+            override fun getInterval(): Int {
+                return 5000
             }
         })
 

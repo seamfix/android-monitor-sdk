@@ -12,14 +12,14 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, heartbeatInterval: Int, heartbeatOperation: HeartbeatOperation){
+    fun runJob(context: Context, heartbeatOperation: HeartbeatOperation){
 
         GlobalScope.launch(Dispatchers.IO) {
-            Thread.sleep((heartbeatInterval).toLong())
+            Thread.sleep((heartbeatOperation.getInterval()).toLong())
             val retrofit = ApiClient.getClient(context)
             val service: Service = retrofit.create(Service::class.java)
-            Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: $heartbeatInterval")
-            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientUptime}\n ")
+            Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: ${heartbeatOperation.getInterval()}")
+            Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientCurrentTime}\n ")
 
             try {
                 val deviceHeartBeat: DeviceHeartBeatRequest = heartbeatOperation.getDeviceHeartBeat()
@@ -39,17 +39,18 @@ object HeartBeat {
                     Log.e("HeartbeatWorker", "Heartbeat sync failed, code: ${response.code()}")
                 }
                 //restart
-                runJob(context, heartbeatInterval, heartbeatOperation)
+                runJob(context, heartbeatOperation)
 
             } catch (e: Exception) {
                 Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
                 //restart
-                runJob(context, heartbeatInterval, heartbeatOperation)
+                runJob(context, heartbeatOperation)
             }
         }
     }
     interface HeartbeatOperation{
         fun getDeviceHeartBeat(): DeviceHeartBeatRequest
+        fun getInterval(): Int
     }
 
 }
