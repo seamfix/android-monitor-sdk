@@ -8,10 +8,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 internal object ApiClient {
 
-    private val config = AppMonitor.config
+    private lateinit var config: Config
 
     fun getClient(context: Context): Retrofit{
-
+        config = AppMonitor.config
         val collectedHeaders = config.headers
 
         val httpClient =  OkHttpClient.Builder()
