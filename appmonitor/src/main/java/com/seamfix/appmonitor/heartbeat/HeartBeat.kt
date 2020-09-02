@@ -3,6 +3,7 @@ package com.seamfix.appmonitor.heartbeat
 import android.content.Context
 import android.util.Log
 import com.seamfix.appmonitor.common.ApiClient
+import com.seamfix.appmonitor.common.Config
 import com.seamfix.appmonitor.common.Service
 import com.seamfix.appmonitor.heartbeat.model.DeviceHeartBeatRequest
 import kotlinx.coroutines.Dispatchers
@@ -12,11 +13,11 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, heartbeatOperation: HeartbeatOperation){
+    fun runJob(context: Context, config: Config, heartbeatOperation: HeartbeatOperation){
 
         GlobalScope.launch(Dispatchers.IO) {
             Thread.sleep((heartbeatOperation.getInterval()).toLong())
-            val retrofit = ApiClient.getClient(context)
+            val retrofit = ApiClient.getClient(context, config)
             val service: Service = retrofit.create(Service::class.java)
             Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: ${heartbeatOperation.getInterval()}")
             Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat().clientCurrentTime}\n ")
@@ -39,12 +40,12 @@ object HeartBeat {
                     Log.e("HeartbeatWorker", "Heartbeat sync failed, code: ${response.code()}")
                 }
                 //restart
-                runJob(context, heartbeatOperation)
+                runJob(context, config, heartbeatOperation)
 
             } catch (e: Exception) {
                 Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
                 //restart
-                runJob(context, heartbeatOperation)
+                runJob(context, config, heartbeatOperation)
             }
         }
     }

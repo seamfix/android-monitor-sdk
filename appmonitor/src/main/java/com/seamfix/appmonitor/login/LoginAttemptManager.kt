@@ -3,6 +3,7 @@ package com.seamfix.appmonitor.login
 import android.content.Context
 import android.util.Log
 import androidx.work.*
+import com.seamfix.appmonitor.common.Config
 import com.seamfix.appmonitor.login.local.AppDatabase
 import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.remote.LoginAttemptWorker
@@ -15,10 +16,12 @@ object LoginAttemptManager {
 
     //Local
     private lateinit var db : AppDatabase
+    lateinit var config: Config
 
 
     /*** Add a login attempt. This login attempt will be saved and synced in queue ***/
-    fun addLoginAttempt(context: Context, loginAttempt: LoginAttempt){
+    fun addLoginAttempt(context: Context, config: Config, loginAttempt: LoginAttempt){
+        this.config = config
         GlobalScope.launch(Dispatchers.IO){
             db = AppDatabase.getDatabase(context)
             db.loginAttemptDao().save(loginAttempt)

@@ -2,7 +2,6 @@ package com.seamfix.appmonitortester
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.seamfix.appmonitor.common.AppMonitor
 import com.seamfix.appmonitor.common.ConfigBuilder
 import com.seamfix.appmonitor.heartbeat.HeartBeat
 import com.seamfix.appmonitor.heartbeat.model.DeviceHeartBeatRequest
@@ -12,7 +11,6 @@ import com.seamfix.appmonitor.login.model.enums.LoginMethod
 import com.seamfix.appmonitor.login.model.enums.LoginMode
 import com.seamfix.appmonitor.login.model.enums.LoginStatus
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,12 +33,9 @@ class MainActivity : AppCompatActivity() {
             .addHeader("Connection" to "keep-alive")
             .build()
 
-        //set the config
-        AppMonitor.config = config
-
 
         //Start the heart beat job:
-        HeartBeat.runJob(this, object : HeartBeat.HeartbeatOperation{
+        HeartBeat.runJob(this, config, object : HeartBeat.HeartbeatOperation{
             override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
@@ -69,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
 
             //save the login attempt object
-            LoginAttemptManager.addLoginAttempt(this@MainActivity, loginAttempt)
+            LoginAttemptManager.addLoginAttempt(this@MainActivity, config, loginAttempt)
         }
 
     }
