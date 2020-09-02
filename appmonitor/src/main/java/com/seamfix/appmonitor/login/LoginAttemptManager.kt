@@ -35,19 +35,8 @@ object LoginAttemptManager {
     /*** This starts the process to sync all LoginAttempts from the database ****/
     private fun syncLoginAttempts(context: Context){
         db = AppDatabase.getDatabase(context)
-
-        //Now, we need to ensure that we don't already have a Work manager instance running so that we don't
-        //mistakenly create multiple work managers. Also, this will help use prevent having multiple
-        // Work manager instance if the user of this library decides calls this method multiple times.
-
-        val existingUUID = getCurrentUploadWorkInformation(context)
-
-        if(existingUUID != null){//existing work manger instance exists:
-            Log.e("LoginAttemptManager", "A Work manger instance has already been created.")
-        }else{
-            //Create a new work manager:
-            createWorker(context)
-        }
+        //Create a new work manager:
+        createWorker(context)
     }
 
 
@@ -67,8 +56,5 @@ object LoginAttemptManager {
         WorkManager
             .getInstance(context)
             .enqueueUniqueWork("sync_offline_attempts", ExistingWorkPolicy.REPLACE, syncWorkRequest)
-
-        //save the uuid for later use to monitor this worker:
-        saveCurrentUploadWorkInformation(context, syncWorkRequest.id)
     }
 }
