@@ -2,6 +2,7 @@ package com.seamfix.appmonitortester
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.seamfix.appmonitor.common.Config
 import com.seamfix.appmonitor.common.ConfigBuilder
 import com.seamfix.appmonitor.heartbeat.HeartBeat
 import com.seamfix.appmonitor.heartbeat.model.DeviceHeartBeatRequest
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Start the heart beat job:
-        HeartBeat.runJob(this, config, object : HeartBeat.HeartbeatOperation{
+        HeartBeat.runJob(this, object : HeartBeat.HeartbeatOperation{
             override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
             override fun getInterval(): Int {
                 return 5000
+            }
+
+            override fun getConfig(): Config {
+                return config
             }
         })
 

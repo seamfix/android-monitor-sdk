@@ -26,10 +26,6 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
     override suspend fun doWork(): Result {
         Log.e(LoginAttemptWorker::class.java.simpleName, "Worker started...")
 
-        config = LoginAttemptManager.config
-        retrofit = ApiClient.getClient(context, config)
-        service = retrofit.create(Service::class.java)
-
         return sync()
     }
 
@@ -37,6 +33,10 @@ internal class LoginAttemptWorker(private val context: Context, params: WorkerPa
     private suspend fun sync(): Result {
 
         if(haveNetworkConnection(context)) {
+
+            config = LoginAttemptManager.config
+            retrofit = ApiClient.getClient(context, config)
+            service = retrofit.create(Service::class.java)
 
             //get all login attempt in the database
             val savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
