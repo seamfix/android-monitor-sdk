@@ -40,8 +40,8 @@ data class LoginAttempt(var kitTag : String,
     var phoneNumber: String = ""
     var simSerial: String = ""
     var info1 : String = ""
-    var info2 : String = ""
+    var info2 : String = this.loginMode.name
     var info3 : String = ""
-    var info4 : String = ""
-    var info5 : String = ""
+    var info4 : String = this.loginMethod.name
+    var info5 : String = this.loginStatus.name
 }

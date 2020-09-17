@@ -31,10 +31,6 @@ Rappmonitor/src/main/java/com/seamfix/appmonitor/login/remote/LoginAttemptWorker
 Qappmonitor/src/androidTest/java/com/seamfix/appmonitor/ExampleInstrumentedTest.kt,7/a/7a6c3cc6b9f77e74ab0d6fe102aedf85ba5546a9
 Œ
 \appmonitor/src/main/java/com/seamfix/appmonitor/login/model/response/LoginAttemptResponse.kt,b/8/b805c210255e4212d85e031efa92f88c812b0f7b
-y
-Iappmonitor/src/main/java/com/seamfix/appmonitor/login/remote/ApiClient.kt,a/d/ad885b8776391234b2cb098b79a17340df075493
-w
-Gappmonitor/src/main/java/com/seamfix/appmonitor/login/remote/Service.kt,0/9/09dcd66f1490886ea6cc27ea9d999856886fa4bd
 ‰
 Yappmonitor/src/androidTest/java/com/seamfix/appmonitor/LoginAttemptDaoInstrumentedTest.kt,9/b/9bef7acf26514b10fe6b96d67aeffb9817a5e06c
 d
@@ -90,3 +86,5 @@ Papp/src/androidTest/java/com/seamfix/appmonitortester/ExampleInstrumentedTest.k
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 W
 'appmonitor/src/main/AndroidManifest.xml,7/3/73a67b71cc183371250918dfce2d6507025dc0fc
+v
+Fappmonitor/src/main/java/com/seamfix/appmonitor/heartbeat/HeartBeat.kt,c/3/c38a8f32771a0d7c5266ad67748dedf3e59ebd47
