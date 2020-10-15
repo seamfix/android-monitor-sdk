@@ -11,7 +11,8 @@ import com.seamfix.appmonitor.login.model.enums.LoginStatus
 @Entity(tableName = "login_attempt")
 data class LoginAttempt(var kitTag : String,
                         val username: String,
-                        val duration: Long,
+                        var activityStartTime: Long,
+                        var activityEndTime: Long,
                         val loginType: String,
                         val loginStatus: LoginStatus,
                         val failureReason: String,
@@ -22,6 +23,7 @@ data class LoginAttempt(var kitTag : String,
     var macAddress: String = ""
     var fullName : String = ""
     var activity : String = ""
+    var duration = this.activityStartTime - this.activityEndTime
     var enrollmentRef: String = ""
     var activityCode : String = ""
     var refDeviceId : String = ""
