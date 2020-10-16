@@ -23,7 +23,7 @@ data class LoginAttempt(var kitTag : String,
     var macAddress: String = ""
     var fullName : String = ""
     var activity : String = ""
-    var duration = this.activityStartTime - this.activityEndTime
+    var duration = this.activityEndTime - this.activityStartTime
     var enrollmentRef: String = ""
     var activityCode : String = ""
     var refDeviceId : String = ""
