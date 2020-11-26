@@ -52,6 +52,7 @@ public class DeviceHeartBeatRequest {
     private String hardDiskManufacturer;
     private String hardDiskSerialNumber;
     private String currentDeviceIdRetrievalStrategy;
+    private String dataRoamingStatus, currentOperatorNetwork, homeOperatorNetwork;
 
     //time it took to make setting request and get a response
     private long pingLatency;
@@ -535,5 +536,29 @@ public class DeviceHeartBeatRequest {
 
     public void setDisplayTimeDialog(Boolean displayTimeDialog) {
         this.displayTimeDialog = displayTimeDialog;
+    }
+
+    public String getDataRoamingStatus() {
+        return dataRoamingStatus;
+    }
+
+    public void setDataRoamingStatus(String dataRoamingStatus) {
+        this.dataRoamingStatus = dataRoamingStatus;
+    }
+
+    public String getCurrentOperatorNetwork() {
+        return currentOperatorNetwork;
+    }
+
+    public void setCurrentOperatorNetwork(String currentOperatorNetwork) {
+        this.currentOperatorNetwork = currentOperatorNetwork;
+    }
+
+    public String getHomeOperatorNetwork() {
+        return homeOperatorNetwork;
+    }
+
+    public void setHomeOperatorNetwork(String homeOperatorNetwork) {
+        this.homeOperatorNetwork = homeOperatorNetwork;
     }
 }
