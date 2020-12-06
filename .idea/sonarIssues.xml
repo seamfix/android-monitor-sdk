@@ -8,6 +8,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/seamfix/appmonitortester/MainActivity.kt">
           <value>
             <set />
@@ -88,6 +93,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/enums/LoginStatus.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/appmonitor/src/main/java/com/seamfix/appmonitor/login/model/response/LoginAttemptResponse.kt">
           <value>
             <set />
@@ -119,6 +129,51 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../RatingTestApp/apprating/src/main/res/layout/dialog_fragment_app_rating.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../TweetCell Syria/app/src/main/java/com/tweetcell/application/WelcomeActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../TweetCell/app/src/main/java/com/tweetcell/application/WelcomeActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/AndroidManifest.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/activity/SplashScreenActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/enums/Constants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/main/entity/enrollmentref/EnrollmentRef.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/util/TelcoUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../mtn/app/src/main/java/com/sf/biocapture/utility/SessionUtil.java">
           <value>
             <set />
           </value>

@@ -22,10 +22,10 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class LoginAttemptDaoInstrumentedTest {
 
-    lateinit var db: AppDatabase
-    lateinit var loginAttemptDao: LoginAttemptDao
+    private lateinit var db: AppDatabase
+    private lateinit var loginAttemptDao: LoginAttemptDao
 
-    private val loginAttempt = LoginAttempt(0,
+    private val loginAttempt = LoginAttempt(
         "jeffemuveyan@gmail.com",
         100000,
         "NA",
@@ -66,28 +66,30 @@ class LoginAttemptDaoInstrumentedTest {
         //the first item we add to the database will start from 1 instead of 0.
 
         assert(aSavedLoginAttempt != null)
-        assert(aSavedLoginAttempt!!.email == loginAttempt.email)
+        assert(aSavedLoginAttempt!!.username == loginAttempt.username)
     }
 
 
     @Test
     @Throws(Exception::class)
-    fun canDelete() = runBlocking {
+    fun delete() = runBlocking {
 
         //write
         db.loginAttemptDao().save(loginAttempt)
 
         //confirm
+        val savedLoginAttempt = db.loginAttemptDao().getSynchronously(1)
+        assert(savedLoginAttempt!!.username == loginAttempt.username)
+
         var savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
-        assert(savedLoginAttempts != null)
         assert(savedLoginAttempts!!.size == 1)
 
         //delete
-        db.loginAttemptDao().delete(loginAttempt)
+        db.loginAttemptDao().delete(savedLoginAttempt)
 
         savedLoginAttempts = db.loginAttemptDao().getAllSynchronously()
 
         //confirm
-        assertThat(savedLoginAttempts!!.size, CoreMatchers.equalTo(0))
+        assert(savedLoginAttempts!!.isEmpty())
     }
 }

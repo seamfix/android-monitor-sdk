@@ -3,7 +3,7 @@ package com.seamfix.appmonitor.login.model.response
 import androidx.annotation.Keep
 
 @Keep
-data class LoginAttemptResponse(val description : String,
+internal data class LoginAttemptResponse(val description : String,
                                 val responseCode: Int,
                                 val responseDescription : String,
                                 val token : Any?,

@@ -9,6 +9,7 @@ import java.util.*
 
 const val UUID = "uuid"
 const val NO_VALUE_SET = "NO_VALUE_SET"
+const val BASE_URL = "BASE_URL"
 
 /*** Saves the uuid of the current upload work so that it can be retrieved when
  * the app is closed or fragment restarts.
