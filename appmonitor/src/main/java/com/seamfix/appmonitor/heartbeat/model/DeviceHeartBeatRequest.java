@@ -33,6 +33,7 @@ public class DeviceHeartBeatRequest {
     private String usedRam;
     private String usedStorage;
     private Boolean withinGeofence;
+    private String locationFetchFailureReason;
 
     private static final long serialVersionUID = 8867821982507370629L;
     private String agent, agentMobile, deployState, modemSerial, modemModel;
@@ -560,5 +561,13 @@ public class DeviceHeartBeatRequest {
 
     public void setHomeOperatorNetwork(String homeOperatorNetwork) {
         this.homeOperatorNetwork = homeOperatorNetwork;
+    }
+
+    public String getLocationFetchFailureReason() {
+        return locationFetchFailureReason;
+    }
+
+    public void setLocationFetchFailureReason(String locationFetchFailureReason) {
+        this.locationFetchFailureReason = locationFetchFailureReason;
     }
 }
