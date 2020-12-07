@@ -34,6 +34,7 @@ public class DeviceHeartBeatRequest {
     private String usedStorage;
     private Boolean withinGeofence;
     private String locationFetchFailureReason;
+    private String totalDataUsed;
 
     private static final long serialVersionUID = 8867821982507370629L;
     private String agent, agentMobile, deployState, modemSerial, modemModel;
@@ -569,5 +570,13 @@ public class DeviceHeartBeatRequest {
 
     public void setLocationFetchFailureReason(String locationFetchFailureReason) {
         this.locationFetchFailureReason = locationFetchFailureReason;
+    }
+
+    public String getTotalDataUsed() {
+        return totalDataUsed;
+    }
+
+    public void setTotalDataUsed(String totalDataUsed) {
+        this.totalDataUsed = totalDataUsed;
     }
 }
