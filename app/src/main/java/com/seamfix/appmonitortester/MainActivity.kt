@@ -1,5 +1,6 @@
 package com.seamfix.appmonitortester
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.seamfix.appmonitor.common.Config
@@ -11,7 +12,8 @@ import com.seamfix.appmonitor.login.model.LoginAttempt
 import com.seamfix.appmonitor.login.model.enums.LoginMethod
 import com.seamfix.appmonitor.login.model.enums.LoginMode
 import com.seamfix.appmonitor.login.model.enums.LoginStatus
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.parcel.Parcelize
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,57 +22,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val config = ConfigBuilder()
-            .setBaseURL("http://10.158.13.105:8190")//set the base url
-
-            .addHeader("Client-ID" to "smartclient")
-            .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.0.0, Install Date: NA]")
-            .addHeader("User-UUID" to "10be74e7-3337-4e93-9114-c71707a7c220")
-            .addHeader("sc-auth-key" to "AHVZ0xgM8X3ghf-1zBqnnAQO1nthw6dlik2zXTh1XpnWkbp" +
-                    "FkGz4S8dL7u-2e1F6E2WKrQo9t4dfyVJib1_gk_in6O6oSHyN2w")
-            .addHeader("Content-Type" to "application/x-www-form-urlencoded")
-            .addHeader("User-Agent" to "Smart Client for KYC [Build: 1.2, Install Date: NA]")
+            //set the base url
+            .setBaseURL("https://servicecloud.bioregistra.com")
+            .addEndPoints("br", "device-heartbeat", "api", "v1", "save")
+            .addHeader("sc-auth-key" to "57662cef-cd4a-4e5b-87dc-f0ef7481ef84")
+            .addHeader("br-auth-key" to "Mg44yZaLFFFvDOnLi3MSXOrj/ru0mzGwR4dPLti1fmV7/" +
+                    "Kj4VMIbXNIfh/IVJrz0kESMSNR5ki8cED59bxU7/A==")
+            .addHeader("br-tag" to "testseun@yopmail.com")
+            .addHeader("br-client-type" to "portal")
+            .addHeader("br-time" to "1605171344913")
+            .addHeader("Content-Type" to "application/json")
             .addHeader("Accept" to "*/*")
             .addHeader("Accept-Encoding" to "gzip, deflate, br")
             .addHeader("Connection" to "keep-alive")
             .build()
 
-
-        //Start the heart beat job:
-        HeartBeat.runJob(this, object : HeartBeat.HeartbeatOperation{
-            override fun getDeviceHeartBeat(): DeviceHeartBeatRequest {
+        // Start the heart beat job:
+        HeartBeat.runJob(this, @Parcelize object : HeartBeat.HeartbeatOperation{
+            override fun getDeviceHeartBeat(context: Context): DeviceHeartBeatRequest {
 
                 //Create your device heart beat and set the values you are interested in:
                 val deviceHeartBeat = DeviceHeartBeatRequest()
-                deviceHeartBeat.clientCurrentTime = System.currentTimeMillis().toString()
+                deviceHeartBeat.clientUptime = System.currentTimeMillis()
 
                 return deviceHeartBeat
             }
 
-            override fun getInterval(): Int {
+            override fun getInterval(): Long {
                 return 5000
             }
 
-            override fun getConfig(): Config {
+            override fun getConfig(context: Context): Config {
                 return config
             }
         })
-
-        //create a login attempt object
-        val loginAttempt = LoginAttempt(
-            "GLO-DN-921C",
-            "jeffemuveyan@gmail.com",
-            100000,
-            "NA",
-            LoginStatus.SUCCESS,
-            "NA",
-            LoginMode.ONLINE,
-            LoginMethod.EMAIL)
-
-        button.setOnClickListener {
-
-            //save the login attempt object
-            LoginAttemptManager.addLoginAttempt(this@MainActivity, config, loginAttempt)
-        }
-
     }
 }
