@@ -260,29 +260,29 @@ public class DeviceHeartBeatRequest {
         this.locationAccuracy = locationAccuracy;
     }
 
-//    public String getNetworkStrength() {
-//        return networkStrength;
-//    }
-//
-//    public void setNetworkStrength(String networkStrength) {
-//        this.networkStrength = networkStrength;
-//    }
-//
-//    public String getNetworkConnectionType() {
-//        return networkConnectionType;
-//    }
-//
-//    public void setNetworkConnectionType(String networkConnectionType) {
-//        this.networkConnectionType = networkConnectionType;
-//    }
-//
-//    public String getNetworkType() {
-//        return networkType;
-//    }
-//
-//    public void setNetworkType(String networkType) {
-//        this.networkType = networkType;
-//    }
+    public String getNetworkStrength() {
+        return networkStrength;
+    }
+
+    public void setNetworkStrength(String networkStrength) {
+        this.networkStrength = networkStrength;
+    }
+
+    public String getNetworkConnectionType() {
+        return networkConnectionType;
+    }
+
+    public void setNetworkConnectionType(String networkConnectionType) {
+        this.networkConnectionType = networkConnectionType;
+    }
+
+    public String getNetworkType() {
+        return networkType;
+    }
+
+    public void setNetworkType(String networkType) {
+        this.networkType = networkType;
+    }
 
     public String getCameraStatus() { return cameraStatus; }
 

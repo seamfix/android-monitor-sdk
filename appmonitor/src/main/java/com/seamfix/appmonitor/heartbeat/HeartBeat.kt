@@ -14,19 +14,26 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, heartbeatOperation: HeartbeatOperation) {
+    fun runJob(context: Context, heartbeatOperation: Operation) {
 
         GlobalScope.launch(Dispatchers.IO) {
             while (true) {
-                Thread.sleep((heartbeatOperation.getInterval()))
-                val retrofit = ApiClient.getClient(context, heartbeatOperation.getConfig(context))
-                val service: Service = retrofit.create(Service::class.java)
-                Log.e("HeartbeatWorker", "Heartbeat syncing. Interval: ${heartbeatOperation.getInterval()}")
-                Log.e("HeartbeatWorker", "Client up time: ${heartbeatOperation.getDeviceHeartBeat(context).clientUptime}\n ")
+                Thread.sleep(((heartbeatOperation as? Operation)?.getInterval() ?: 0))
+
+                val (request, config) = if (heartbeatOperation is ParceledHeartbeatOperation) {
+                    heartbeatOperation.getDeviceHeartBeat(context) to
+                            heartbeatOperation.getConfig(context)
+                } else {
+                    (heartbeatOperation as HeartbeatOperation).getDeviceHeartBeat() to
+                            heartbeatOperation.getConfig()
+                }
 
                 try {
-                    val deviceHeartBeat: DeviceHeartBeatRequest = heartbeatOperation.getDeviceHeartBeat(context)
-                    val paths = heartbeatOperation.getConfig(context).endPoints
+                    val retrofit = ApiClient.getClient(context, config)
+                    val service: Service = retrofit.create(Service::class.java)
+
+                    val deviceHeartBeat: DeviceHeartBeatRequest = request
+                    val paths = config.endPoints
                     val response: Response<String> = service.sync(paths, deviceHeartBeat)
 
                     if (response.code() == 200 && response.body() != null) {
@@ -42,22 +49,25 @@ object HeartBeat {
                     } else {
                         Log.e("HeartbeatWorker", "Heartbeat sync failed, code: ${response.code()}")
                     }
-                    //restart
-                    //runJob(context, heartbeatOperation)
 
                 } catch (e: Exception) {
                     Log.e("HeartbeatWorker", "Heartbeat sync failed: ${e.message}")
-                    //restart
-                    //runJob(context,  heartbeatOperation)
                 }
             }
         }
     }
 
-
-    interface HeartbeatOperation: Parcelable {
-        fun getDeviceHeartBeat(context: Context): DeviceHeartBeatRequest
+    interface Operation {
         fun getInterval(): Long
+    }
+
+    interface HeartbeatOperation: Operation {
+        fun getDeviceHeartBeat(): DeviceHeartBeatRequest
+        fun getConfig(): Config
+    }
+
+    interface ParceledHeartbeatOperation: Parcelable, Operation {
+        fun getDeviceHeartBeat(context: Context): DeviceHeartBeatRequest
         fun getConfig(context: Context): Config
     }
 }

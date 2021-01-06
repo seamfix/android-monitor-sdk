@@ -3,6 +3,7 @@ package com.seamfix.appmonitor.services
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import com.seamfix.appmonitor.heartbeat.HeartBeat
 import com.seamfix.appmonitor.heartbeat.HeartBeat.runJob
 
@@ -12,7 +13,9 @@ class HeartbeatService : Service() {
          synchronized (this) {
              if (!sInitialized) {
                  intent?.let {
-                     val operation: HeartBeat.HeartbeatOperation? = it.getParcelableExtra(HEARTBEAT_OPERATION)
+                     val operation: HeartBeat.ParceledHeartbeatOperation? = it.getParcelableExtra(HEARTBEAT_OPERATION)
+                     val url = operation?.getConfig(this)?.baseURL
+                     Log.d(TAG, "onStartCommand: $url")
                      runJob(this, operation!!)
                  }
 
@@ -30,5 +33,6 @@ class HeartbeatService : Service() {
     companion object {
         const val HEARTBEAT_OPERATION = "heartbeat"
         var sInitialized = false
+        private const val TAG = "HeartbeatService"
     }
 }
