@@ -14,11 +14,11 @@ import retrofit2.Response
 
 object HeartBeat {
 
-    fun runJob(context: Context, heartbeatOperation: Operation) {
+    fun runJob(context: Context, heartbeatOperation: Suspendable) {
 
         GlobalScope.launch(Dispatchers.IO) {
             while (true) {
-                Thread.sleep(((heartbeatOperation as? Operation)?.getInterval() ?: 0))
+                Thread.sleep(((heartbeatOperation as? Suspendable)?.getInterval() ?: 0))
 
                 val (request, config) = if (heartbeatOperation is ParceledHeartbeatOperation) {
                     heartbeatOperation.getDeviceHeartBeat(context) to
@@ -57,16 +57,16 @@ object HeartBeat {
         }
     }
 
-    interface Operation {
+    interface Suspendable {
         fun getInterval(): Long
     }
 
-    interface HeartbeatOperation: Operation {
+    interface HeartbeatOperation: Suspendable {
         fun getDeviceHeartBeat(): DeviceHeartBeatRequest
         fun getConfig(): Config
     }
 
-    interface ParceledHeartbeatOperation: Parcelable, Operation {
+    interface ParceledHeartbeatOperation: Parcelable, Suspendable {
         fun getDeviceHeartBeat(context: Context): DeviceHeartBeatRequest
         fun getConfig(context: Context): Config
     }
