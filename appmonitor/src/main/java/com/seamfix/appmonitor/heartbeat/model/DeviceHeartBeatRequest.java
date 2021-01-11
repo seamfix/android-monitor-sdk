@@ -2,90 +2,174 @@
 package com.seamfix.appmonitor.heartbeat.model;
 
 import java.util.List;
-import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class DeviceHeartBeatRequest {
 
+    private String deviceId = "70f7174e44c12e6a";    // For devices >= SDK_VERSION 28 use the device id, devices
+                                                        // running SDK_VERSION < 28 use the secure android id
+    private String agentName = "";
+    private String agentPhoneNumber = "";
+    private String macAddress = "";
+    private String cameraStatus = "";
+    private String scannerStatus = "";
+    private String clientTimeStatus = "";
+    private Long clientUptime = Long.MIN_VALUE; // An indication of how long the client has been running
+    private Long receiptDate = Long.MIN_VALUE;  // The timestamp the API received the payload from the service
+    private Double longitude = Double.MIN_VALUE;
+    private Double latitude = Double.MIN_VALUE;
+    private Boolean rooted = true;
+    private String osName = "";
+    private String osVersion = "";
+    private String locationInformationSource = "";  // locationInformationSource one of GPS or WIFI
+    private String locationAccuracy = "";
+    private String processorSpeed = "";
+    private String usedStorage = "";
+    private String availableStorage = "";
+    private String totalStorage = "";
+    private String ramSize = "";
+    private String appVersion = "";
+    private Boolean locationPermissionGranted = false;
+    private Long locationGenerationTime = 0L;
+    private String coordinateAddress = "";
+
+    private String scannerModel = "";            // - To be added
+
+     private String networkStrength;
+     private String networkConnectionType;
+     private String networkType;
+
     private List<AppDataUsageList> appDataUsageList;
-    private String appVersion;
     private String availableRam;
-    private String availableStorage;
     private Boolean batteryChargeStatus;
-    private Double clientUptime;
     private String deviceBatteryCharge;
     private Boolean kioskMode;
-    private Double latitude;
     private Boolean localTimeCorrect;
-    private String locationGenerationTime;
     private Double loginUptime;
-    private Double longitude;
-    private String macAddress;
     private String networkName;
-    private String networkType;
-    private String osName;
-    private String osVersion;
-    private String processorSpeed;
     private String processorType;
-    private String ramSize;
-    private String refDeviceId;
     private String tag;
-    private String totalStorage;
     private String usedRam;
-    private String usedStorage;
     private Boolean withinGeofence;
     private String locationFetchFailureReason;
     private String totalDataUsed;
-
     private static final long serialVersionUID = 8867821982507370629L;
-    private String agent, agentMobile, deployState, modemSerial, modemModel;
-    private int modemSignalLevel;
-    private boolean camConnected, scannerConnected, rooted;
+    private String deployState, modemSerial, modemModel;
+    private Integer modemSignalLevel;
     private Long totalRegistration, totalSynchronized, totalConfirmed, dailyRegistration, dailySynchronized, dailyConfirmed;
-    private String thresholdVersion, realTimeDeviceId, networkStrength, locationInformationSource;
+    private String thresholdVersion, realTimeDeviceId;
     //determines if it is Wifi or Mobile Network
-    private String networkConnectionType;
     private String livenessThresholdVersion;
-    private Double locationAccuracy;
     //Determines if latitude and longitude is mocked
     private Boolean mockedCoordinate;
     private Boolean phoneStatusEnabled;
-    private Boolean locationPermissionGranted;
     private String clientCurrentTime;
     private String hardDiskManufacturer;
     private String hardDiskSerialNumber;
     private String currentDeviceIdRetrievalStrategy;
     private String dataRoamingStatus, currentOperatorNetwork, homeOperatorNetwork;
-
     //time it took to make setting request and get a response
-    private long pingLatency;
-
+    private Long pingLatency;
     //Exact Time response came in from the server
     private String responseTime;
-
     private Boolean displayTimeDialog;
 
-    public List<AppDataUsageList> getAppDataUsageList() {
-        return appDataUsageList;
+
+
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setAppDataUsageList(List<AppDataUsageList> appDataUsageList) {
-        this.appDataUsageList = appDataUsageList;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public String getAppVersion() {
-        return appVersion;
+    public String getAgentName() {
+        return agentName;
     }
 
-    public void setAppVersion(String appVersion) {
-        this.appVersion = appVersion;
+    public void setAgentName(String agentName) {
+        this.agentName = agentName;
     }
 
-    public String getAvailableRam() {
-        return availableRam;
+    public String getMacAddress() {
+        return macAddress;
     }
 
-    public void setAvailableRam(String availableRam) {
-        this.availableRam = availableRam;
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
+
+    /**
+     * Fetches the time the HeartBeat was sent.
+     * @return the time on the device
+     * */
+    public String getClientTimeStatus() {
+        return clientTimeStatus;
+    }
+
+    /**
+     * Sets the time the HeartBeat was sent.
+     * @param clientTimeStatus current time on the device
+     */
+    public void setClientTimeStatus(String clientTimeStatus) {
+        this.clientTimeStatus = clientTimeStatus;
+    }
+
+    public Long getClientUptime() {
+        return clientUptime;
+    }
+
+    public void setClientUptime(Long clientUptime) {
+        this.clientUptime = clientUptime;
+    }
+
+    public Long getReceiptDate() {
+        return receiptDate;
+    }
+
+    public void setReceiptDate(Long receiptDate) {
+        this.receiptDate = receiptDate;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Boolean isRooted() {
+        return rooted;
+    }
+
+    public void setRooted(boolean rooted) {
+        this.rooted = rooted;
+    }
+
+    public String getOsName() {
+        return osName;
+    }
+
+    public void setOsName(String osName) {
+        this.osName = osName;
+    }
+
+    public String getUsedStorage() {
+        return usedStorage;
+    }
+
+    public void setUsedStorage(String usedStorage) {
+        this.usedStorage = usedStorage;
     }
 
     public String getAvailableStorage() {
@@ -96,20 +180,157 @@ public class DeviceHeartBeatRequest {
         this.availableStorage = availableStorage;
     }
 
+    public String getTotalStorage() {
+        return totalStorage;
+    }
+
+    public void setTotalStorage(String totalStorage) {
+        this.totalStorage = totalStorage;
+    }
+
+    public String getRamSize() {
+        return ramSize;
+    }
+
+    public void setRamSize(String ramSize) {
+        this.ramSize = ramSize;
+    }
+
+    public String getAppVersion() {
+        return appVersion;
+    }
+
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
+
+    public Boolean getLocationPermissionGranted() {
+        return locationPermissionGranted;
+    }
+
+    public void setLocationPermissionGranted(Boolean locationPermissionGranted) {
+        this.locationPermissionGranted = locationPermissionGranted;
+    }
+
+    public Long getLocationGenerationTime() {
+        return locationGenerationTime;
+    }
+
+    public void setLocationGenerationTime(Long locationGenerationTime) {
+        this.locationGenerationTime = locationGenerationTime;
+    }
+
+    public String getCoordinateAddress() {
+        return coordinateAddress;
+    }
+
+    public void setCoordinateAddress(String coordinateAddress) {
+        this.coordinateAddress = coordinateAddress;
+    }
+
+    public String getProcessorSpeed() {
+        return processorSpeed;
+    }
+
+    public void setProcessorSpeed(String processorSpeed) {
+        this.processorSpeed = processorSpeed;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion;
+    }
+
+    public String getLocationInformationSource() {
+        return locationInformationSource;
+    }
+
+    public void setLocationInformationSource(String locationInformationSource) {
+        this.locationInformationSource = locationInformationSource;
+    }
+
+    public String getLocationAccuracy() {
+        return locationAccuracy;
+    }
+
+    public void setLocationAccuracy(String locationAccuracy) {
+        this.locationAccuracy = locationAccuracy;
+    }
+
+    public String getNetworkStrength() {
+        return networkStrength;
+    }
+
+    public void setNetworkStrength(String networkStrength) {
+        this.networkStrength = networkStrength;
+    }
+
+    public String getNetworkConnectionType() {
+        return networkConnectionType;
+    }
+
+    public void setNetworkConnectionType(String networkConnectionType) {
+        this.networkConnectionType = networkConnectionType;
+    }
+
+    public String getNetworkType() {
+        return networkType;
+    }
+
+    public void setNetworkType(String networkType) {
+        this.networkType = networkType;
+    }
+
+    public String getCameraStatus() { return cameraStatus; }
+
+    public void setCameraStatus(String cameraStatus) { this.cameraStatus = cameraStatus; }
+
+    public String getScannerStatus() { return scannerStatus; }
+
+    public void setScannerStatus(String scannerStatus) { this.scannerStatus = scannerStatus; }
+
+    public String getAgentPhoneNumber() {
+        return agentPhoneNumber;
+    }
+
+    public void setAgentPhoneNumber(String agentPhoneNumber) {
+        this.agentPhoneNumber = agentPhoneNumber;
+    }
+
+    public String getScannerModel() {
+        return scannerModel;
+    }
+
+    public void setScannerModel(String scannerModel) {
+        this.scannerModel = scannerModel;
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    public List<AppDataUsageList> getAppDataUsageList() {
+        return appDataUsageList;
+    }
+
+    public void setAppDataUsageList(List<AppDataUsageList> appDataUsageList) {
+        this.appDataUsageList = appDataUsageList;
+    }
+
+    public String getAvailableRam() {
+        return availableRam;
+    }
+
+    public void setAvailableRam(String availableRam) {
+        this.availableRam = availableRam;
+    }
+
     public Boolean getBatteryChargeStatus() {
         return batteryChargeStatus;
     }
 
     public void setBatteryChargeStatus(Boolean batteryChargeStatus) {
         this.batteryChargeStatus = batteryChargeStatus;
-    }
-
-    public Double getClientUptime() {
-        return clientUptime;
-    }
-
-    public void setClientUptime(Double clientUptime) {
-        this.clientUptime = clientUptime;
     }
 
     public String getDeviceBatteryCharge() {
@@ -128,28 +349,12 @@ public class DeviceHeartBeatRequest {
         this.kioskMode = kioskMode;
     }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
     public Boolean getLocalTimeCorrect() {
         return localTimeCorrect;
     }
 
     public void setLocalTimeCorrect(Boolean localTimeCorrect) {
         this.localTimeCorrect = localTimeCorrect;
-    }
-
-    public String getLocationGenerationTime() {
-        return locationGenerationTime;
-    }
-
-    public void setLocationGenerationTime(String locationGenerationTime) {
-        this.locationGenerationTime = locationGenerationTime;
     }
 
     public Double getLoginUptime() {
@@ -160,60 +365,12 @@ public class DeviceHeartBeatRequest {
         this.loginUptime = loginUptime;
     }
 
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
     public String getNetworkName() {
         return networkName;
     }
 
     public void setNetworkName(String networkName) {
         this.networkName = networkName;
-    }
-
-    public String getNetworkType() {
-        return networkType;
-    }
-
-    public void setNetworkType(String networkType) {
-        this.networkType = networkType;
-    }
-
-    public String getOsName() {
-        return osName;
-    }
-
-    public void setOsName(String osName) {
-        this.osName = osName;
-    }
-
-    public String getOsVersion() {
-        return osVersion;
-    }
-
-    public void setOsVersion(String osVersion) {
-        this.osVersion = osVersion;
-    }
-
-    public String getProcessorSpeed() {
-        return processorSpeed;
-    }
-
-    public void setProcessorSpeed(String processorSpeed) {
-        this.processorSpeed = processorSpeed;
     }
 
     public String getProcessorType() {
@@ -224,22 +381,6 @@ public class DeviceHeartBeatRequest {
         this.processorType = processorType;
     }
 
-    public String getRamSize() {
-        return ramSize;
-    }
-
-    public void setRamSize(String ramSize) {
-        this.ramSize = ramSize;
-    }
-
-    public String getRefDeviceId() {
-        return refDeviceId;
-    }
-
-    public void setRefDeviceId(String refDeviceId) {
-        this.refDeviceId = refDeviceId;
-    }
-
     public String getTag() {
         return tag;
     }
@@ -248,28 +389,12 @@ public class DeviceHeartBeatRequest {
         this.tag = tag;
     }
 
-    public String getTotalStorage() {
-        return totalStorage;
-    }
-
-    public void setTotalStorage(String totalStorage) {
-        this.totalStorage = totalStorage;
-    }
-
     public String getUsedRam() {
         return usedRam;
     }
 
     public void setUsedRam(String usedRam) {
         this.usedRam = usedRam;
-    }
-
-    public String getUsedStorage() {
-        return usedStorage;
-    }
-
-    public void setUsedStorage(String usedStorage) {
-        this.usedStorage = usedStorage;
     }
 
     public Boolean getWithinGeofence() {
@@ -282,22 +407,6 @@ public class DeviceHeartBeatRequest {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public String getAgent() {
-        return agent;
-    }
-
-    public void setAgent(String agent) {
-        this.agent = agent;
-    }
-
-    public String getAgentMobile() {
-        return agentMobile;
-    }
-
-    public void setAgentMobile(String agentMobile) {
-        this.agentMobile = agentMobile;
     }
 
     public String getDeployState() {
@@ -324,36 +433,12 @@ public class DeviceHeartBeatRequest {
         this.modemModel = modemModel;
     }
 
-    public int getModemSignalLevel() {
+    public Integer getModemSignalLevel() {
         return modemSignalLevel;
     }
 
     public void setModemSignalLevel(int modemSignalLevel) {
         this.modemSignalLevel = modemSignalLevel;
-    }
-
-    public boolean isCamConnected() {
-        return camConnected;
-    }
-
-    public void setCamConnected(boolean camConnected) {
-        this.camConnected = camConnected;
-    }
-
-    public boolean isScannerConnected() {
-        return scannerConnected;
-    }
-
-    public void setScannerConnected(boolean scannerConnected) {
-        this.scannerConnected = scannerConnected;
-    }
-
-    public boolean isRooted() {
-        return rooted;
-    }
-
-    public void setRooted(boolean rooted) {
-        this.rooted = rooted;
     }
 
     public Long getTotalRegistration() {
@@ -420,44 +505,12 @@ public class DeviceHeartBeatRequest {
         this.realTimeDeviceId = realTimeDeviceId;
     }
 
-    public String getNetworkStrength() {
-        return networkStrength;
-    }
-
-    public void setNetworkStrength(String networkStrength) {
-        this.networkStrength = networkStrength;
-    }
-
-    public String getLocationInformationSource() {
-        return locationInformationSource;
-    }
-
-    public void setLocationInformationSource(String locationInformationSource) {
-        this.locationInformationSource = locationInformationSource;
-    }
-
-    public String getNetworkConnectionType() {
-        return networkConnectionType;
-    }
-
-    public void setNetworkConnectionType(String networkConnectionType) {
-        this.networkConnectionType = networkConnectionType;
-    }
-
     public String getLivenessThresholdVersion() {
         return livenessThresholdVersion;
     }
 
     public void setLivenessThresholdVersion(String livenessThresholdVersion) {
         this.livenessThresholdVersion = livenessThresholdVersion;
-    }
-
-    public Double getLocationAccuracy() {
-        return locationAccuracy;
-    }
-
-    public void setLocationAccuracy(Double locationAccuracy) {
-        this.locationAccuracy = locationAccuracy;
     }
 
     public Boolean getMockedCoordinate() {
@@ -474,14 +527,6 @@ public class DeviceHeartBeatRequest {
 
     public void setPhoneStatusEnabled(Boolean phoneStatusEnabled) {
         this.phoneStatusEnabled = phoneStatusEnabled;
-    }
-
-    public Boolean getLocationPermissionGranted() {
-        return locationPermissionGranted;
-    }
-
-    public void setLocationPermissionGranted(Boolean locationPermissionGranted) {
-        this.locationPermissionGranted = locationPermissionGranted;
     }
 
     public String getClientCurrentTime() {
@@ -516,7 +561,7 @@ public class DeviceHeartBeatRequest {
         this.currentDeviceIdRetrievalStrategy = currentDeviceIdRetrievalStrategy;
     }
 
-    public long getPingLatency() {
+    public Long getPingLatency() {
         return pingLatency;
     }
 
